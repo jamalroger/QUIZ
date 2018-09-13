@@ -21,7 +21,7 @@
       }
 .img {
   padding:5px;
-
+  cursor: pointer;
 
 }
       
@@ -35,10 +35,19 @@
          <div ng-app="test" ng-controller="main">
             
         <div class="panel panel-default">
-         <div class="panel-heading"> <font color="blue"> Choix la l'image qui ya la singification de mot :</font>  {{mots[i]}} </div>
+         <div class="panel-heading"> <font color="blue"> Choix la l'image qui ya la singification de mot :</font>  {{mots[0]}} </div>
          <div class="panel-body"> 
-             <img class="img" ng-repeat="x in img" src="{{x}}"  ng-hide="var" ng-click='choix($index);' width="100px" height="100px"/>
-                    
+           <div ng-show="content">
+
+              <img class="img" ng-repeat="x in img" id="{{$index}}" ng-repeat="" src="{{x}}"  ng-click='choix($index);' width="100px" height="100px"/>
+
+           </div>
+
+              <div ng-hide="content" style="text-align: center">
+
+                 bravooooooooo!!! vouz avez  {{note}} point.
+
+              </div>
         
         </div>
         <div class="panel-footer" style="text-align:center">
@@ -59,9 +68,9 @@
 
      <script>
       angular.module('test',[]).controller('main',function($scope){
-       $scope.i=0;
+        $scope.content=true;
        $scope.mots=['Demande','long','pleur','peur','vieux','cassee'];
-        $scope.img=[ 
+       $scope.img=[ 
                     'img/2.png',
                     'img/4.png',
                     'img/5.gif',
@@ -69,47 +78,52 @@
                     'img/7.png',
                     'img/8.jpg'
                     ];
+   
+
      $scope.choix = function(x){
-              if (x == 0 && $scope.mots[0]=='Demande' )
+             
+              if (x == 0  && $scope.mots[0]=='Demande' )
               {
               $scope.answer='correct '; 
               $scope.mots.splice(0, 1);
-            
-
+              document.getElementById(x).style.display="none"; 
+              $scope.note=2;
               } else if (x == 1 && $scope.mots[0]=='long' )
-              {
-             $scope.answer='correct '; 
-               $scope.mots.splice(0, 1);
-             
-
-              } else if (x == 4  && $scope.mots[0]=='pleur' )
               {
                $scope.answer='correct '; 
                $scope.mots.splice(0, 1);
-             
-
+               document.getElementById(x).style.display="none"; 
+               $scope.note=$scope.note+2;
+              } else if (x == 4 && $scope.mots[0]=='pleur' )
+              {
+               $scope.answer='correct '; 
+               $scope.mots.splice(0, 1);
+               document.getElementById(x).style.display="none"; 
+               $scope.note=$scope.note+2;
               }  else if (x == 2  && $scope.mots[0]=='peur' )
               {
-                $scope.answer='correct '; 
+               $scope.answer='correct '; 
                $scope.mots.splice(0, 1);
-              
-
-              } else if (x == 5  && $scope.mots[0]=='vieux' )
+               document.getElementById(x).style.display="none"; 
+               $scope.note=$scope.note+2;
+              } else if (x == 5 && $scope.mots[0]=='vieux' )
               {
               $scope.answer='correct '; 
                $scope.mots.splice(0, 1);
-               
-
-              } else if (x == 3  && $scope.mots[0]=='cassee' )
+               document.getElementById(x).style.display="none"; 
+               $scope.note=$scope.note+2;
+              } else if (x == 3 && $scope.mots[0]=='cassee' )
               {
                $scope.answer='correct ';   
                $scope.mots.splice(0, 1);
-            
-
+               document.getElementById(x).style.display="none"; 
+               $scope.content=false;
+              $scope.note=$scope.note+2;
+             
               } else {
         
               $scope.answer='choix incorrect ';             
-
+              $scope.note--;
               }
 
 
